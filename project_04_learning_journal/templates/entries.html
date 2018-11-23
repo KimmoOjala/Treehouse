@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="entry-list">
+	            {% if entries.count() %}
+	                <h1>What I've been learning:</h1><br> 
+	                {% for entry in entries %}
+	                    <ul>         
+	                        <li>
+	                            <h2><a href="{{ url_for('detail', entry_id=entry.pk, slug=entry.slugified_title) }}">{{ entry.title }}</a></h2>
+	                            <p>{{ entry.date.strftime('%B %d, %Y') }}</p>
+	                        </li>
+	                    </ul>                        
+	                {% endfor %}
+	            {% else %}
+	                <h4>You have no journal entries yet. Make your first entry!</h4>
+	            {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

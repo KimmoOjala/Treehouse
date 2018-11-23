@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_field %}
+
+{% block content %}
+   <section>
+        <div class="container">
+            <br><h2>Add a tag to your Entry:</h2>
+            <form action="" method='POST' class="form">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                {{ render_field(field) }}
+                {% endfor %}
+                <input type="submit" class="button-primary" value="Add Tag!"><br><br> 
+            </form>
+        </div>
+    </section>
+    <section>
+      <div class="container">
+          <h4>Need a new tag? <a href="{{ url_for('create_tag') }}" title="Create tag">Create one!</a></h4><br>
+      </div>
+    </section>      
+{% endblock %}
+
+

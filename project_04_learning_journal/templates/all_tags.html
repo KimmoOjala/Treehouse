@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="entry-list">
+                {% if tag_list.count() %}
+                    <h2>Tags used in my Learning Journal:</h2> 
+	                {% for tag in tag_list %}
+	                    <ul>         
+	                        <li>
+	                            <p>{{ tag.tag }} / <a href="{{ url_for('entries_same_tag', tag_id=tag.id, slug=tag.slugified_tag) }}"> All Entries with this Tag</a>
+	                            {% if current_user.is_authenticated %} / <a href="{{ url_for('edit_tag', tag_id=tag.id, slug=tag.slugified_tag) }}"> Edit Tag</a>
+	                            {% endif %}
+	                            </p>
+	                        </li>
+	                    </ul>                        
+	                {% endfor %}
+	            {% else %}
+	                {% if current_user.is_authenticated %}
+	                    <p>You have not used tags. <a href="{{ url_for('create_tag') }}" title="Create tag">Create a Tag!</a></p>
+	                {% else %}
+	                    <h2>Tags have not been used yet.</h2>
+	                {% endif %}
+	            {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

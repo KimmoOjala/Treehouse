@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="entry-list">
+	            {% if tagged_entries.count() %}
+	                <h2>Entries with the tag "{{ tag_name }}":</h2> 
+	                {% for entry in tagged_entries %}
+	                    <ul>         
+	                        <li>
+	                            <p><a href="{{ url_for('detail', entry_id=entry.pk, slug=entry.slugified_title) }}">{{ entry.title }}</a></p>
+	                            <time>{{ entry.date.strftime('%B %d, %Y') }}</time>
+	                        </li>
+	                    </ul>                        
+	                {% endfor %}
+	            {% else %}
+	                <h4>Sorry! There are no Journal Entries with this tag.</h4>
+	            {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

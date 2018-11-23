@@ -1,0 +1,2 @@
+- To load data from minerals.json to database run load_to_database.py
+- To find out about most common attributes of minerals run most_common_attributes.py

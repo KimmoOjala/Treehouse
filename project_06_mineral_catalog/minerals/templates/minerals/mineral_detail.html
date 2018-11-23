@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+
+{% block title %}{{ mineral.name }}{% endblock %}
+
+{% block content %}
+<div class="bounds bounds--small">
+    <div class="grid-100 mineral__container">
+      <h1 class="mineral__new_name">{{ mineral.name}}</h1>
+      <div class="mineral__image-bg">
+        {% with 'minerals/images/'|add:mineral.name|add:'.jpg' as image_static %}
+	             <img class="mineral__image" src="{% static image_static %}">
+	    {% endwith %}
+        <p class="mineral__caption">{{ mineral.image_caption }}</p>
+      </div>
+      <div class="mineral__table-container">
+        <table class="mineral__table">
+	        <tr>
+		      <td class="mineral__category">{{ "formula"|title }}</td>
+		      <td>{{ mineral.formula }}</td>
+		    </tr>
+		    <tr>
+		      <td class="mineral__category">{{ "category"|title }}</td>
+		      <td class="mineral__formula">{{ mineral.category }}</td>
+		    </tr>
+		    <tr>
+		      <td class="mineral__category">{{ "crystal system"|title }}</td>
+		      <td>{{ mineral.crystal_system }}</td>
+		    </tr>
+		    <tr>
+		      <td class="mineral__category">{{ "mohs scale hardness"|title }}</td>
+		      <td>{{ mineral.mohs_scale_hardness }}</td>
+		    </tr>
+		    <tr>
+		      <td class="mineral__category">{{ "luster"|title }}</td>
+		      <td>{{ mineral.luster }}</td>
+		    </tr>
+		    <tr>
+		      <td class="mineral__category">{{ "color"|title }}</td>
+		      <td>{{ mineral.color }}</td>
+		    </tr>
+		    <tr>
+		      <td class="mineral__category">{{"specific gravity"|title }}</td>
+		      <td>{{ mineral.specific_gravity }}</td>
+		    </tr>
+        </table>
+      </div>
+    </div>
+ </div>
+<div class="minerals__random">
+    <a class="minerals__anchor" href="{% url 'minerals:detail' pk=random_mineral.pk %}">Satunnainen mineraali</a>
+</div>
+{% endblock %}
+ 

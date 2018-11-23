@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_field %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <br><h2>Remove a tag from your Entry:</h2>
+            <form action="" method='POST' class="form">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                {{ render_field(field) }}
+                {% endfor %}
+                <input type="submit" class="button-primary" value="Remove Tag!"><br><br><br>
+            </form>
+        </div>
+    </section>     
+{% endblock %}
+
+

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="entry-list single">
+                <article>
+                    {% if current_user.is_authenticated %}
+	                    <h4><a href="{{ url_for('edit', entry_id=entry.pk, slug=entry.slugified_title) }}" title="Edit Entry">Edit Entry</a>
+			            <a href="{{ url_for('delete', entry_id=entry.pk, slug=entry.slugified_title) }}" title="Delete entry">Delete Entry</a></h4><br>
+                    {% endif %}
+                    <h1>{{ entry.title }}</h1>
+                    <htime>{{ entry.date.strftime('%B %d, %Y') }}</time>
+                    <div class="entry">
+                        <h3>Time Spent (min.): </h3>
+                        <p>{{ entry.time_spent }}</p>
+                    </div>
+                    <div class="entry">
+                        <h3>What I Learned:</h3>
+                        <p>{{ entry.what_i_learned }}</p>
+                    </div>
+                    <div class="entry">
+                        <h3>Resources to Remember:</h3>
+                        <p>{{ entry.resources }}</p>
+                    </div>
+                    <div class="entry">
+	                {% if entry_tags.count() %}
+		                <h3>Tags:</h3>
+		                {% for tag in entry_tags %}
+			                    <ul>         
+			                        <li>
+			                            <p>{{ tag.tag }}</p>
+			                     	</li>
+			                    </ul>                        
+			            {% endfor %}
+				        {% if current_user.is_authenticated %}    
+					        <h4><a href="{{ url_for('add_tag', entry_id=entry.pk, slug=entry.slugified_title) }}" title="Add tag">Add</a> /
+					        <a href="{{ url_for('remove_tag', entry_id=entry.pk, slug=entry.slugified_title) }}" title="Remove tag">Remove</a> Tags.<h4>
+			            {% endif %}
+			        {% else %}			        
+			            <h3>Tags:</h3>
+			                    <ul>         
+			                        <li>
+			                            <p>This Entry has not been tagged. {% if current_user.is_authenticated %}<a href="{{ url_for('add_tag', entry_id=entry.pk, slug=entry.slugified_title) }}" title="Add tag">Tag it!</a></p>
+			                     	    {% endif %}
+			                     	</li>
+			                    </ul>
+			        {% endif %}                                    
+	            </div>
+                </article>
+            </div>
+        </div>
+    </section>
+{% endblock %}

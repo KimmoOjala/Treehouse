@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <p>Are you sure you want to delete this entry?</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.confirm }}
+            <input type="submit" class="button-primary" value="Confirm"><br><br>
+        </form>
+    </div>
+{% endblock %}
